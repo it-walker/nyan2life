@@ -348,10 +348,17 @@ input {
   }
 }
 
-button:focus {
-  border: 1px #FFF solid;
-  border-radius: 3px;
-  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+button {
+  &:focus {
+    border: 1px #FFF solid;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    &::-moz-focus-inner {
+      /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
+      border: 0;
+      padding: 0;
+    }
+  }
 }
 
 input {
@@ -379,12 +386,6 @@ input {
       -webkit-appearance: none;
     }
   }
-}
-
-button::-moz-focus-inner {
-  /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
-  border: 0;
-  padding: 0;
 }
 
 input {
@@ -451,18 +452,19 @@ textarea {
 5.1 Links
 --------------------------------------------------------------*/
 
+$linkColor: #0b789c;
 a {
-  color: #0b789c;
+  color: $linkColor;
   &:visited,
   &:hover {
-    color: #0b789c;
+    color: $linkColor;
   }
   &:focus {
-    color: #0b789c;
+    color: $linkColor;
     outline: thin dotted;
   }
   &:active {
-    color: #0b789c;
+    color: $linkColor;
     outline: 0;
   }
 }
@@ -553,26 +555,27 @@ a {
     .menu>ul>li.page_item_has_children>a,
     div>ul>li.menu-item-has-children>a {
       padding-right: 18px;
-    }
-    .menu>ul>li.page_item_has_children>a:before,
-    div>ul>li.menu-item-has-children>a:before {
-      font-family: "FontAwesome" !important;
-      font-style: normal !important;
-      font-weight: normal !important;
-      font-variant: normal !important;
-      text-transform: none !important;
-      speak: none;
-      line-height: 1;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      position: absolute;
-      right: 2px;
-      top: 18px;
-      content: "\f107";
-      font-size: 14px;
-      width: 14px;
-      text-align: left;
-      display: inline-block;
+      &:before {
+        font: {
+          family: "FontAwesome" !important;
+          style: normal !important;
+          weight: normal !important;
+          variant: normal !important;
+        }
+        text-transform: none !important;
+        // speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        right: 2px;
+        top: 18px;
+        content: "\f107";
+        font-size: 14px;
+        width: 14px;
+        text-align: left;
+        display: inline-block;
+      }
     }
   }
 }
@@ -667,13 +670,13 @@ a {
 
 .alignleft {
   display: inline;
-  float: left;
+  // float: left;
   margin-right: 1.5em;
 }
 
 .alignright {
   display: inline;
-  float: right;
+  // float: right;
   margin-left: 1.5em;
 }
 
@@ -861,29 +864,32 @@ article.sticky {
   }
 }
 
-.entry-header {
-  h1,
-  h2 {
-    margin: 0.25em 0 0;
-    font-weight: 400;
-    color: #252525;
-    font-size: 1.5em;
-    /* 24px */
-  }
-}
-
 .entry-meta .posted-on a {
   margin-left: 5px;
 }
 
+@mixin headerSetting {
+    margin: 0.25em 0 0;
+    font-weight: 400;
+    color: #252525;
+    font-size: 1.5em;
+}
+
 .entry-header {
+  h1 {
+    @include headerSetting;
+  }
   h2 {
+    @include headerSetting;
     float: left;
     width: 89%;
     max-width: 89%;
     clear: none;
     margin-bottom: 10px;
   }
+}
+
+.entry-header {
   .entry-meta {
     margin-top: 5px;
   }
@@ -1052,9 +1058,9 @@ h2.comments-title {
 }
 
 .comment-list {
-  .comment {
-    /*border-bottom:1px red solid;*/
-  }
+  // .comment {
+  //   /*border-bottom:1px red solid;*/
+  // }
   .comment-meta {
     padding: 10px 0px;
   }

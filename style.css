@@ -271,6 +271,10 @@ button:focus {
   border: 1px #FFF solid;
   border-radius: 3px;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6); }
+  button:focus::-moz-focus-inner {
+    /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
+    border: 0;
+    padding: 0; }
 
 input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus {
   border: 1px #FFF solid;
@@ -289,11 +293,6 @@ input[type="search"] {
   input[type="search"]::-webkit-search-decoration {
     /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
     -webkit-appearance: none; }
-
-button::-moz-focus-inner {
-  /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
-  border: 0;
-  padding: 0; }
 
 input::-moz-focus-inner {
   /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
@@ -400,25 +399,24 @@ a {
   .main-navigation > .menu > ul > li.page_item_has_children > a,
   .main-navigation > div > ul > li.menu-item-has-children > a {
     padding-right: 18px; }
-  .main-navigation > .menu > ul > li.page_item_has_children > a:before,
-  .main-navigation > div > ul > li.menu-item-has-children > a:before {
-    font-family: "FontAwesome" !important;
-    font-style: normal !important;
-    font-weight: normal !important;
-    font-variant: normal !important;
-    text-transform: none !important;
-    speak: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    position: absolute;
-    right: 2px;
-    top: 18px;
-    content: "\f107";
-    font-size: 14px;
-    width: 14px;
-    text-align: left;
-    display: inline-block; }
+    .main-navigation > .menu > ul > li.page_item_has_children > a:before,
+    .main-navigation > div > ul > li.menu-item-has-children > a:before {
+      font-family: "FontAwesome" !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-variant: normal !important;
+      text-transform: none !important;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      right: 2px;
+      top: 18px;
+      content: "\f107";
+      font-size: 14px;
+      width: 14px;
+      text-align: left;
+      display: inline-block; }
 
 @media screen and (min-width: 640px) {
   .main-navigation ul {
@@ -489,12 +487,10 @@ a {
 
 .alignleft {
   display: inline;
-  float: left;
   margin-right: 1.5em; }
 
 .alignright {
   display: inline;
-  float: right;
   margin-left: 1.5em; }
 
 .aligncenter {
@@ -621,23 +617,25 @@ article.sticky {
 .entry-footer .edit-link a {
   padding-left: 5px; }
 
-.entry-header h1,
+.entry-meta .posted-on a {
+  margin-left: 5px; }
+
+.entry-header h1 {
+  margin: 0.25em 0 0;
+  font-weight: 400;
+  color: #252525;
+  font-size: 1.5em; }
 .entry-header h2 {
   margin: 0.25em 0 0;
   font-weight: 400;
   color: #252525;
   font-size: 1.5em;
-  /* 24px */ }
-
-.entry-meta .posted-on a {
-  margin-left: 5px; }
-
-.entry-header h2 {
   float: left;
   width: 89%;
   max-width: 89%;
   clear: none;
   margin-bottom: 10px; }
+
 .entry-header .entry-meta {
   margin-top: 5px; }
 
@@ -760,8 +758,6 @@ h2.comments-title {
   color: #353535;
   font-size: 1.385em; }
 
-.comment-list .comment {
-  /*border-bottom:1px red solid;*/ }
 .comment-list .comment-meta {
   padding: 10px 0px; }
 .comment-list .comment-content {
